@@ -7,8 +7,8 @@ const server = prerender({
     "--remote-debugging-port=9222",
     "--hide-scrollbars"
   ],
-  waitAfterLastRequest: 300,
-  followRedirects: true,
+  // waitAfterLastRequest: 300,
+  // followRedirects: true,
   forwardHeaders: true,
   chromeLocation: "/usr/bin/chromium-browser"
   //chromeLocation: "/opt/google/chrome/chrome"
