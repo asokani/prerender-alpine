@@ -15,6 +15,7 @@ const server = prerender({
 });
 
 server.use(require("prerender-request-blacklist"));
+server.use(require("prerender-redis-cache"));
 server.use(prerender.blacklist());
 server.use(prerender.httpHeaders());
 
