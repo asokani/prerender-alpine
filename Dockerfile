@@ -5,7 +5,7 @@ ENV CHROME_PATH=/usr/lib/chromium/
 COPY ./package.json .
 COPY ./server.js .
 COPY ./yarn.lock .
-COPY ./patches .
+COPY ./patches ./patches
 
 # use edge repositories
 # RUN sed -i -e 's/v3\.8/edge/g' /etc/apk/repositories
