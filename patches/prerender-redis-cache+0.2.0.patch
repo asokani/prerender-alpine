@@ -1,13 +1,16 @@
 diff --git a/node_modules/prerender-redis-cache/lib/prerenderRedisCache.js b/node_modules/prerender-redis-cache/lib/prerenderRedisCache.js
-index 14d7f23..6ba399e 100644
+index 14d7f23..b5bd2a4 100644
 --- a/node_modules/prerender-redis-cache/lib/prerenderRedisCache.js
 +++ b/node_modules/prerender-redis-cache/lib/prerenderRedisCache.js
-@@ -12,10 +12,19 @@ var REDIS_URL = process.env.REDISTOGO_URL ||
+@@ -12,10 +12,20 @@ var REDIS_URL = process.env.REDISTOGO_URL ||
  var url = require('url');
  var TTL = process.env.PAGE_TTL || 86400;
  
 +let options = {};
 +let connectionPassword;
++
+ // Parse out the connection vars from the env string.
+ var connection = url.parse(REDIS_URL);
 +
 +// Parse out password from the connection string
 +if (connection.auth) {
@@ -15,15 +18,13 @@ index 14d7f23..6ba399e 100644
 +    options.password = connectionPassword
 +}
 +
- // Parse out the connection vars from the env string.
- var connection = url.parse(REDIS_URL);
  var redis = require('redis');
 -var client = redis.createClient(connection.port, connection.hostname);
 +var client = redis.createClient(connection.port, connection.hostname, options);
  var redisOnline = false;
  
  var STATUS_CODES_TO_CACHE = {
-@@ -38,9 +47,8 @@ connection.path = (connection.pathname || '/').slice(1);
+@@ -38,9 +48,8 @@ connection.path = (connection.pathname || '/').slice(1);
  connection.database = connection.path.length ? connection.path : '0';
  client.select(connection.database);
  
@@ -34,8 +35,9 @@ index 14d7f23..6ba399e 100644
  }
  
  // Catch all error handler. If redis breaks for any reason it will be reported here.
-@@ -110,3 +118,4 @@ module.exports = {
+@@ -110,3 +119,5 @@ module.exports = {
          next();
      }
  };
++
 +
