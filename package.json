@@ -4,10 +4,12 @@
   "description": "lightweight prerender container built on alpine linux",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "patch-package": "^6.1.2",
+    "postinstall-postinstall": "^2.0.0",
     "prerender": "5.6.0",
     "prerender-redis-cache": "^0.2.0",
     "prerender-request-blacklist": "1.0.2"
