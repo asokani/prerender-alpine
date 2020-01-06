@@ -14,10 +14,14 @@ COPY ./patches ./patches
 RUN apk add --update-cache chromium \
     && rm -rf /var/cache/apk/* /tmp/*
 
+RUN apk add --no-cache tini
+
 RUN npm i -g yarn
 # install npm packages
 RUN yarn install 
 
 EXPOSE 3000
+
+ENTRYPOINT ["/sbin/tini", "--"]
 
 CMD ["node", "server.js"]
